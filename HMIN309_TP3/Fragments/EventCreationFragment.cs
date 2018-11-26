@@ -9,6 +9,8 @@ namespace HMIN309_TP3
 {
     public class EventCreationFragment : Fragment
     {
+        private DatabaseHelper databaseHelper;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = inflater.Inflate(Resource.Layout.fragment_event_creation, container, false);
@@ -18,6 +20,8 @@ namespace HMIN309_TP3
 
         public virtual void OnViewCreated(View view, Bundle savedInstanceState)
         {
+            databaseHelper = new DatabaseHelper();
+
             Button creationButton = view.FindViewById<Button>(Resource.Id.eventCreationValidate);
 
             creationButton.Click += (sender, e) => {
@@ -35,7 +39,7 @@ namespace HMIN309_TP3
                 {
                     Event newEvent = new Event(eventNameTextView.Text, "", eventDescriptionTextView.Text);
 
-                    DatabaseHelper.InsertEvent(newEvent);
+                    databaseHelper.InsertEvent(newEvent);
 
                     toastText = "Event created";
                 }

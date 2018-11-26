@@ -27,8 +27,6 @@ namespace HMIN309_TP3
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
 
             navigation.SetOnNavigationItemSelectedListener(this);
-
-            DatabaseHelper.Initialize();
         }
         public bool OnNavigationItemSelected(IMenuItem item)
         {
