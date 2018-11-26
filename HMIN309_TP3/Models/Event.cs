@@ -18,5 +18,11 @@ namespace HMIN309_TP3.Models
         {
         }
 
+        public Event(string name, string type, string description)
+        {
+            this.name = name;
+            this.type = type;
+            this.description = description;
+        }
     }
 }

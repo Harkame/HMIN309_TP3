@@ -3,23 +3,21 @@ using HMIN309_TP3.Models;
 
 namespace HMIN309_TP3
 {
-    public class DatabaseHelper
+    public static class DatabaseHelper
     {
-        SQLiteConnection sqliteConnection;
+        private static SQLiteConnection sqliteConnection = new SQLiteConnection("EventDatabase.db");
 
-        public DatabaseHelper()
+        public static void Initialize()
         {
-            sqliteConnection = new SQLiteConnection("EventDatabase.db");
-
             sqliteConnection.CreateTable<Event>();
         }
 
-        public void InsertEvent(Event eventToInsert)
+        public static void InsertEvent(Event eventToInsert)
         {
             sqliteConnection.Insert(eventToInsert);
         }
 
-        public Event[] getAllEvents()
+        public static Event[] getAllEvents()
         {
             return sqliteConnection.Table<Event>().ToArray();
         }

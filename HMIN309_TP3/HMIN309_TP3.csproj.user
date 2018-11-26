@@ -4,6 +4,6 @@
     <SelectedDevice>HUAWEI LLD-L31</SelectedDevice>
     <DefaultDevice>Android_Accelerated_x86_Oreo</DefaultDevice>
     <AndroidDesignerPreferredTheme>AppTheme</AndroidDesignerPreferredTheme>
-    <AndroidDesignerPreferredDevice>Nexus 10</AndroidDesignerPreferredDevice>
+    <AndroidDesignerPreferredDevice>Nexus 7 2013</AndroidDesignerPreferredDevice>
   </PropertyGroup>
 </Project>
