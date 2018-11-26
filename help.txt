@@ -1,0 +1,1 @@
+https://docs.microsoft.com/fr-fr/xamarin/android/data-cloud/data-access/using-sqlite-orm

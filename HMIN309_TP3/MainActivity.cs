@@ -11,31 +11,48 @@ namespace HMIN309_TP3
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
-        TextView textMessage;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
 
-            textMessage = FindViewById<TextView>(Resource.Id.message);
+            FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
+            HomeFragment homeFragment = new HomeFragment();
+
+            // The fragment will have the ID of Resource.Id.fragment_container.
+            fragmentTx.Replace(Resource.Id.fragment_container, homeFragment);
+
+            // Commit the transaction.
+            fragmentTx.Commit();
+
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+
             navigation.SetOnNavigationItemSelectedListener(this);
         }
         public bool OnNavigationItemSelected(IMenuItem item)
         {
+            FragmentTransaction fragmentTx = this.FragmentManager.BeginTransaction();
+
+            Fragment fragment;
+
             switch (item.ItemId)
             {
                 case Resource.Id.navigation_home:
-                    textMessage.SetText(Resource.String.title_home);
+                    fragment = new HomeFragment();
+
+                    fragmentTx.Replace(Resource.Id.fragment_container, fragment);
+
+                    fragmentTx.Commit();
                     return true;
-                case Resource.Id.navigation_dashboard:
-                    textMessage.SetText(Resource.String.title_dashboard);
-                    return true;
-                case Resource.Id.navigation_notifications:
-                    textMessage.SetText(Resource.String.title_notifications);
+                case Resource.Id.navigation_event_creation:
+                    fragment = new EventCreationFragment();
+
+                    fragmentTx.Replace(Resource.Id.fragment_container, fragment);
+
+                    fragmentTx.Commit();
                     return true;
             }
+
             return false;
         }
     }
