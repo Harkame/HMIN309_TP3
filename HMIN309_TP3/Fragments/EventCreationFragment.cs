@@ -18,20 +18,25 @@ namespace HMIN309_TP3
             return view;
         }
 
-        public virtual void OnViewCreated(View view, Bundle savedInstanceState)
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             databaseHelper = new DatabaseHelper();
 
             Button creationButton = view.FindViewById<Button>(Resource.Id.eventCreationValidate);
 
-            creationButton.Click += (sender, e) => {
-                string toastText = "";
+            creationButton.Click += delegate
+            {
+                string toastMessage = "";
                 bool validEvent = true;
 
                 TextView eventNameTextView = view.FindViewById<TextView>(Resource.Id.eventCreationName);
 
                 if (eventNameTextView.Text.Length == 0)
-                    toastText = "Invalid event name";
+                {
+                    toastMessage = "Invalid event name";
+
+                    validEvent = false;
+                }
                 
                 TextView eventDescriptionTextView = view.FindViewById<TextView>(Resource.Id.eventCreationDescription);
 
@@ -41,12 +46,10 @@ namespace HMIN309_TP3
 
                     databaseHelper.InsertEvent(newEvent);
 
-                    toastText = "Event created";
+                    toastMessage = "Event created";
                 }
 
-                Toast toast = new Toast(this.Context);
-                toast.SetText(toastText);
-                toast.Show();
+                Android.Widget.Toast.MakeText(this.Context, toastMessage, ToastLength.Long).Show();
             };
         }
     }
