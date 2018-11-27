@@ -9,7 +9,7 @@ namespace HMIN309_TP3
 
         public DatabaseHelper()
         {
-            sqliteConnection = new SQLiteConnection("EventDatabase.db");
+            sqliteConnection = new SQLiteConnection(Path.Combine(Environment.GetFolderPath (Environment.SpecialFolder.Personal),"EventDatabase.db3"););
 
             sqliteConnection.CreateTable<Event>();
         }
