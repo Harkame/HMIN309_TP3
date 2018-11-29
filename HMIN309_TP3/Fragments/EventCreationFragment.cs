@@ -37,12 +37,14 @@ namespace HMIN309_TP3
 
                     validEvent = false;
                 }
-                
+
+                DatePicker eventDatePicker = view.FindViewById<DatePicker>(Resource.Id.eventCreationDate);
+
                 TextView eventDescriptionTextView = view.FindViewById<TextView>(Resource.Id.eventCreationDescription);
 
                 if (validEvent == true)
                 {
-                    Event newEvent = new Event(eventNameTextView.Text, "", eventDescriptionTextView.Text);
+                    Event newEvent = new Event(eventNameTextView.Text, 0, "", eventDescriptionTextView.Text);
 
                     databaseHelper.InsertEvent(newEvent);
 

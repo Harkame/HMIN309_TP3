@@ -8,7 +8,7 @@ namespace HMIN309_TP3.Models
     {
         private int id;
 
-        private string date; //TODO Change to date
+        private long date;
 
         private string name;
 
@@ -31,7 +31,7 @@ namespace HMIN309_TP3.Models
         }
 
         [NotNull, Column("date")]
-        public string Date
+        public long Date
         {
             get
             {
@@ -90,9 +90,10 @@ namespace HMIN309_TP3.Models
         {
         }
 
-        public Event(string name, string type, string description)
+        public Event(string name, long date, string type, string description)
         {
             Name = name;
+            Date = date;
             Type = type;
             Description = description;
         }

@@ -13,6 +13,8 @@ namespace HMIN309_TP3
         {
             sqliteConnection = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EventDatabase.db3"));
 
+            sqliteConnection.DropTable<Event>();
+
             sqliteConnection.CreateTable<Event>();
         }
 
