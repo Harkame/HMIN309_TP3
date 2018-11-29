@@ -1,5 +1,7 @@
 ﻿using SQLite;
 using HMIN309_TP3.Models;
+using System;
+using System.IO;
 
 namespace HMIN309_TP3
 {
@@ -9,7 +11,7 @@ namespace HMIN309_TP3
 
         public DatabaseHelper()
         {
-            sqliteConnection = new SQLiteConnection(Path.Combine(Environment.GetFolderPath (Environment.SpecialFolder.Personal),"EventDatabase.db3"););
+            sqliteConnection = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "EventDatabase.db3"));
 
             sqliteConnection.CreateTable<Event>();
         }

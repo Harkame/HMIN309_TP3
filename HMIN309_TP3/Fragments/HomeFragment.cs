@@ -4,6 +4,8 @@ using Android.Views;
 using Android.Widget;
 using HMIN309_TP3.Models;
 
+using HMIN309_TP3.Adapters;
+
 namespace HMIN309_TP3
 {
     public class HomeFragment : Fragment
@@ -17,17 +19,15 @@ namespace HMIN309_TP3
             return view;
         }
 
-        public virtual void OnViewCreated(View view, Bundle savedInstanceState)
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             databaseHelper = new DatabaseHelper();
 
             Event[] events = databaseHelper.getAllEvents();
 
-            string[] countries = { };
-
             ListView eventsList = view.FindViewById<ListView>(Resource.Id.list_events);
 
-            ArrayAdapter adapter = new ArrayAdapter<string>(this.Context, Resource.Layout.list_item, countries);
+            EventAdapter adapter = new EventAdapter(this.Context, Resource.Layout.event_row, events);
 
             eventsList.Adapter = adapter;
         }
