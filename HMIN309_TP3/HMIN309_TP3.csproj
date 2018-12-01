@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Adapters\EventAdapter.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
+    <Compile Include="Fragments\DatePickerFragment.cs" />
     <Compile Include="Fragments\HomeFragment.cs" />
     <Compile Include="Fragments\EventCreationFragment.cs" />
     <Compile Include="MainActivity.cs" />

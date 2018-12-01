@@ -22,7 +22,21 @@ namespace HMIN309_TP3
         {
             databaseHelper = new DatabaseHelper();
 
+
+            Button dateButton = view.FindViewById<Button>(Resource.Id.eventCreationDate);
+
+            dateButton.Click += delegate
+            {
+                DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
+                {
+                    dateButton.Text = time.ToLongDateString();
+                });
+
+                frag.Show(FragmentManager, DatePickerFragment.TAG);
+            };
+
             Button creationButton = view.FindViewById<Button>(Resource.Id.eventCreationValidate);
+
 
             creationButton.Click += delegate
             {
