@@ -1,1 +1,2 @@
 https://docs.microsoft.com/fr-fr/xamarin/android/data-cloud/data-access/using-sqlite-orm
+https://damian.fyi/2017/01/24/friendly-xamarin-forms-datepicker/
