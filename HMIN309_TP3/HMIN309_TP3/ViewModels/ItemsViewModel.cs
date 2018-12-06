@@ -25,9 +25,11 @@ namespace HMIN309_TP3.ViewModels
         {
             Items.Clear();
 
-            var items = DatabaseHelper.getAllEvents();
+            var items = await Task.FromResult(DatabaseHelper.GetAllEvents());
+
             foreach (var item in items)
             {
+                item.DateText = new DateTime(item.Date).ToLongDateString();
                 Items.Add(item);
             }
         }

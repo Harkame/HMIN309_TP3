@@ -12,7 +12,6 @@ namespace HMIN309_TP3
 
         static DatabaseHelper()
         {
-            sqliteConnection.DropTable<Event>();
             sqliteConnection.CreateTable<Event>();
         }
 
@@ -21,9 +20,15 @@ namespace HMIN309_TP3
             sqliteConnection.Insert(eventToInsert);
         }
 
-        public static Event[] getAllEvents()
+        public static Event[] GetAllEvents()
         {
+            RemoveOldEvents();
             return sqliteConnection.Table<Event>().ToArray();
+        }
+
+        private static void RemoveOldEvents()
+        {
+            sqliteConnection.Execute("DELETE FROM Events WHERE date < " + DateTime.Now.Ticks + "; ");
         }
     }
 }

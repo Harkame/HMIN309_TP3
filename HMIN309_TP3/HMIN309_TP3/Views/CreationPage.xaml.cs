@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,7 +13,9 @@ namespace HMIN309_TP3.Views
     public partial class CreationPage : ContentPage
     {
         public Event Event { get; set; }
+        public DateTime MinimumDate { get; set; }
         public DateTime Date { get; set; }
+        public DateTime MaximumDate { get; set; }
 
         public CreationPage()
         {
@@ -22,17 +23,23 @@ namespace HMIN309_TP3.Views
 
             Event = new Event
             {
-                Name = "Event name",
+                Name = "",
                 Date = 0,
-                Type = "Event type",
-                Description = "Event description"
+                Type = "",
+                Description = ""
             };
+
+            MinimumDate = DateTime.Now;
+            Date = DateTime.Now;
+            MaximumDate = DateTime.Now.AddYears(1);
 
             BindingContext = this;
         }
 
         void Save_Clicked(object sender, EventArgs e)
         {
+            Event.Date = Date.Ticks;
+
             DatabaseHelper.InsertEvent(Event);
 
             DependencyService.Get<IMessage>().ShortAlert("Event created");

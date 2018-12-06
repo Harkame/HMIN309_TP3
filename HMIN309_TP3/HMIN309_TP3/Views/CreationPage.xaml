@@ -2,24 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMIN309_TP3.Views.CreationPage"
-             Title="New Item">
+             Title="Creation">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Name" FontSize="Medium" />
-            <Entry Text="{Binding Item.Name}"
+            <Entry Text="{Binding Event.Name}"
                    Placeholder="Example : Footing"
                    FontSize="Small" />
             <Label Text="Date" FontSize="Medium" />
             <DatePicker
-                MinimumDate="01/01/2018"
-                MaximumDate="12/31/2018"
-                Date="{Binding Date}" />
+                MinimumDate="{Binding MinimumDate}"
+                Date="{Binding Date}"
+                MaximumDate="{Binding MaximumDate}" />
+            <TimePicker
+                HorizontalOptions="Center"
+            />
             <Label Text="Type" FontSize="Medium" />
             <Entry
-                Text="{Binding Item.Type}"
+                Text="{Binding Event.Type}"
                 Placeholder="Example : Sport"
                 FontSize="Small"
                 Margin="0"
@@ -29,13 +32,10 @@
                 FontSize="Medium"
             />
             <Entry
-                Text="{Binding Item.Description}"
+                Text="{Binding Event.Description}"
                 Placeholder="Example : 10KM"
                 FontSize="Small"
                 Margin="0"
-            />
-            <TimePicker
-                HorizontalOptions="Center"
             />
         </StackLayout>
     </ContentPage.Content>

@@ -14,6 +14,8 @@ namespace HMIN309_TP3.Models
         [NotNull, Column("date")]
         public long Date { get; set; }
 
+        public string DateText { get; set; }
+
         [NotNull, Column("type")]
         public string Type { get; set; }
 

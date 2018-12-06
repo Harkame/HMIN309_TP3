@@ -26,8 +26,8 @@ namespace HMIN309_TP3.Views
 
             var item = new Event
             {
-                Name = "Item 1",
-                Description = "This is an item description."
+                Name = "",
+                Description = ""
             };
 
             viewModel = new ItemDetailViewModel(item);
