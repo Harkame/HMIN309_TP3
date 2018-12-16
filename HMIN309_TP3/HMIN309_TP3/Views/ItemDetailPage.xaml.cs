@@ -5,26 +5,31 @@ using Xamarin.Forms.Xaml;
 
 using HMIN309_TP3.Models;
 using HMIN309_TP3.ViewModels;
+using HMIN309_TP3.Services;
 
 namespace HMIN309_TP3.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        private ItemDetailViewModel viewModel;
+
+        private Event item;
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
 
             BindingContext = this.viewModel = viewModel;
+
+            item = viewModel.Item;
         }
 
         public ItemDetailPage()
         {
             InitializeComponent();
 
-            var item = new Event
+            item = new Event
             {
                 Name = "",
                 Description = ""
@@ -32,6 +37,15 @@ namespace HMIN309_TP3.Views
 
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
+        }
+
+        public async void DeleteEvent(object sender, EventArgs e)
+        {
+            DatabaseHelper.deleteEvent(item);
+
+            DependencyService.Get<IMessage>().ShortAlert("Event delete");
+
+            await Navigation.PopAsync();
         }
     }
 }

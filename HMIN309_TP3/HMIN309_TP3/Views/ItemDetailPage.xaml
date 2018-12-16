@@ -12,5 +12,13 @@
         <Label Text="{Binding Item.Type}" FontSize="Small"/>
         <Label Text="Description" FontSize="Medium" />
         <Label Text="{Binding Item.Description}" FontSize="Small"/>
+        <Button
+                Text="Delete"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="DeleteEvent"
+                BackgroundColor="Red"
+                TextColor="White"
+            />
     </StackLayout>
 </ContentPage>

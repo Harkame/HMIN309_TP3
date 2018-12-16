@@ -20,6 +20,11 @@ namespace HMIN309_TP3
             sqliteConnection.Insert(eventToInsert);
         }
 
+        public static void deleteEvent(Event eventToDelete)
+        {
+            sqliteConnection.Delete(eventToDelete);
+        }
+
         public static Event[] GetAllEvents()
         {
             RemoveOldEvents();

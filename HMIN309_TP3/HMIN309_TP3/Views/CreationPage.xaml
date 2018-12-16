@@ -9,15 +9,18 @@
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Name" FontSize="Medium" />
-            <Entry Text="{Binding Event.Name}"
-                   Placeholder="Example : Footing"
-                   FontSize="Small" />
+            <Entry
+                Text="{Binding Event.Name}"
+                Placeholder="Example : Footing"
+                FontSize="Small"
+                />
             <Label Text="Date" FontSize="Medium" />
             <DatePicker
                 MinimumDate="{Binding MinimumDate}"
                 Date="{Binding Date}"
                 MaximumDate="{Binding MaximumDate}" />
             <TimePicker
+                Time="{Binding NotificationTime}"
                 HorizontalOptions="Center"
             />
             <Label Text="Type" FontSize="Medium" />
