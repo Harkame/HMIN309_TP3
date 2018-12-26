@@ -21,5 +21,8 @@ namespace HMIN309_TP3.Models
 
         [Column("description")]
         public string Description { get; set; }
+
+        [Column("file_path")]
+        public string FilePath { get; set; }
     }
 }

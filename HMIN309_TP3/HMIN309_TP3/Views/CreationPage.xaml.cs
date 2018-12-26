@@ -7,6 +7,8 @@ using HMIN309_TP3.Models;
 
 using HMIN309_TP3.Services;
 using Plugin.LocalNotifications;
+using Plugin.Media.Abstractions;
+using Plugin.Media;
 
 namespace HMIN309_TP3.Views
 {
@@ -36,6 +38,8 @@ namespace HMIN309_TP3.Views
             MaximumDate = DateTime.Now.AddYears(1);
 
             BindingContext = this;
+
+            CameraButton.Clicked += CameraButton_Clicked;
         }
 
         void Save_Clicked(object sender, EventArgs e)
@@ -47,6 +51,41 @@ namespace HMIN309_TP3.Views
             CrossLocalNotifications.Current.Show(Event.Name, Event.Description, 101, new DateTime(Event.Date));
 
             DependencyService.Get<IMessage>().ShortAlert("Event created");
+        }
+
+        private async void CameraButton_Clicked(object sender, EventArgs e)
+        {
+            MediaFile photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+
+            if (photo != null)
+            {
+                Event.FilePath = photo.AlbumPath;
+                PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+            }
+
+            /*
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                return;
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                Directory = "Sample",
+                Name = "test.jpg"
+            });
+
+            if (file == null)
+                return;
+
+            await DisplayAlert("File Location", file.Path, "OK");
+
+            PhotoImage.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+            */
         }
     }
 }

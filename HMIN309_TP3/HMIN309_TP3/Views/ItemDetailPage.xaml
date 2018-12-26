@@ -12,6 +12,7 @@
         <Label Text="{Binding Item.Type}" FontSize="Small"/>
         <Label Text="Description" FontSize="Medium" />
         <Label Text="{Binding Item.Description}" FontSize="Small"/>
+        <Image x:Name="PhotoImage" />
         <Button
                 Text="Delete"
                 VerticalOptions="CenterAndExpand"
