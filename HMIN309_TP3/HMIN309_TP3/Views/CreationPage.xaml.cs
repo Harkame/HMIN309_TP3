@@ -9,6 +9,7 @@ using HMIN309_TP3.Services;
 using Plugin.LocalNotifications;
 using Plugin.Media.Abstractions;
 using Plugin.Media;
+using HMIN309_TP3.ViewModels;
 
 namespace HMIN309_TP3.Views
 {
@@ -62,30 +63,11 @@ namespace HMIN309_TP3.Views
                 Event.FilePath = photo.AlbumPath;
                 PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
             }
+        }
 
-            /*
-            await CrossMedia.Current.Initialize();
-
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                return;
-
-            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-            {
-                Directory = "Sample",
-                Name = "test.jpg"
-            });
-
-            if (file == null)
-                return;
-
-            await DisplayAlert("File Location", file.Path, "OK");
-
-            PhotoImage.Source = ImageSource.FromStream(() =>
-            {
-                var stream = file.GetStream();
-                return stream;
-            });
-            */
+        private async void Click_Geolocation(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MapPage());
         }
     }
 }

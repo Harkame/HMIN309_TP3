@@ -7,6 +7,7 @@ using HMIN309_TP3.Models;
 using HMIN309_TP3.ViewModels;
 using HMIN309_TP3.Services;
 using Plugin.Media.Abstractions;
+using System.IO;
 
 namespace HMIN309_TP3.Views
 {
@@ -25,12 +26,18 @@ namespace HMIN309_TP3.Views
 
             item = viewModel.Item;
 
-            MediaFile photo = new MediaFile(item.FilePath, null, null, item.FilePath);
+            MediaFile photo = new MediaFile(item.FilePath, () =>
+            {
+                return File.OpenRead(item.FilePath);
+            },
+            null,
+            item.FilePath);
 
             if (photo != null)
             {
                 PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
             }
+            
         }
 
         public ItemDetailPage()

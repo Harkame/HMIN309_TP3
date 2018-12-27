@@ -42,7 +42,12 @@
                 Margin="0"
             />
 
-            <Image x:Name="PhotoImage" />
+                <Button
+                    Text="Geolocation"
+                    Clicked="Click_Geolocation"
+                />
+
+                <Image x:Name="PhotoImage" />
             <Button x:Name="CameraButton" Text="Take Photo"/>
             </StackLayout>
             </ScrollView>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMIN309_TP3.Views.ItemDetailPage"
              Title="{Binding Title}">
+    <ScrollView>
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Name" FontSize="Medium" />
         <Label Text="{Binding Item.Name}" FontSize="Small"/>
@@ -22,4 +23,5 @@
                 TextColor="White"
             />
     </StackLayout>
+        </ScrollView>
 </ContentPage>
