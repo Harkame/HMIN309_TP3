@@ -6,22 +6,27 @@
              x:Name="BrowseItemsPage">
     <ContentPage.Content>
         <StackLayout>
+            <SearchBar
+                x:Name="SearchBar"
+                TextChanged="SearchBar_OnTextChanged" />
             <ListView x:Name="ItemsListView" 
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
-                 HasUnevenRows="true"
-                 CachingStrategy="RecycleElement"
-                 ItemSelected="OnItemSelected">
+                HasUnevenRows="true"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10">
-                                <Label Text="{Binding Name}" 
-                                   LineBreakMode="NoWrap" 
-                                   Style="{DynamicResource ListItemTextStyle}" 
-                                   FontSize="13"
+                                <Label
+                                    Text="{Binding Name}" 
+                                    LineBreakMode="NoWrap" 
+                                    Style="{DynamicResource ListItemTextStyle}" 
+                                     FontSize="13"
                                  />
-                                <Label Text="{Binding DateText}" 
+                                <Label
+                                    Text="{Binding DateText}" 
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemTextStyle}"
                                     FontSize="13"

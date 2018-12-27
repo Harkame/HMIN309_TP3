@@ -17,18 +17,30 @@ namespace HMIN309_TP3
 
         public static void InsertEvent(Event eventToInsert)
         {
+            RemoveOldEvents();
+
             sqliteConnection.Insert(eventToInsert);
         }
 
         public static void deleteEvent(Event eventToDelete)
         {
+            RemoveOldEvents();
+
             sqliteConnection.Delete(eventToDelete);
         }
 
         public static Event[] GetAllEvents()
         {
             RemoveOldEvents();
+
             return sqliteConnection.Table<Event>().ToArray();
+        }
+
+        public static Event[] GetAllEventsByName(string eventName)
+        {
+            RemoveOldEvents();
+
+            return sqliteConnection.Table<Event>().Where(x => x.Name.ToLower().Contains(eventName.ToLower())).ToArray();
         }
 
         private static void RemoveOldEvents()

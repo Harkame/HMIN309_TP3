@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 using HMIN309_TP3.Models;
 using HMIN309_TP3.ViewModels;
+using static HMIN309_TP3.ViewModels.ItemsViewModel;
 
 namespace HMIN309_TP3.Views
 {
@@ -28,6 +29,8 @@ namespace HMIN309_TP3.Views
 
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
+            itemsViewModel.LoadItemsCommand.Execute(null);
+
             ItemsListView.SelectedItem = null;
         }
 
@@ -36,6 +39,16 @@ namespace HMIN309_TP3.Views
             base.OnAppearing();
 
             itemsViewModel.LoadItemsCommand.Execute(null);
+        }
+
+        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ItemsListView.BeginRefresh();
+
+            itemsViewModel.MyCommandd = new MyCommand(e.NewTextValue, itemsViewModel.Items);
+            itemsViewModel.MyCommandd.Execute(null);
+
+            ItemsListView.EndRefresh();
         }
     }
 }

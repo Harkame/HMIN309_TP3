@@ -58,6 +58,8 @@ namespace HMIN309_TP3.Views
         {
             DatabaseHelper.deleteEvent(item);
 
+            File.Delete(item.FilePath);
+
             DependencyService.Get<IMessage>().ShortAlert("Event delete");
 
             await Navigation.PopAsync();
