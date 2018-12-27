@@ -47,6 +47,8 @@ namespace HMIN309_TP3.Views
         {
             Event.Date = Date.Ticks + (long) NotificationTime.TotalSeconds;
 
+            Event.DateText = new DateTime(Event.Date).ToLongDateString();
+
             DatabaseHelper.InsertEvent(Event);
 
             CrossLocalNotifications.Current.Show(Event.Name, Event.Description, 101, new DateTime(Event.Date));

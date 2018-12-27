@@ -28,13 +28,10 @@ namespace HMIN309_TP3.ViewModels
         {
             Items.Clear();
 
-            var items = await Task.FromResult(DatabaseHelper.GetAllEvents());
+            var events = await Task.FromResult(DatabaseHelper.GetAllEvents());
 
-            foreach (var item in items)
-            {
-                item.DateText = new DateTime(item.Date).ToLongDateString();
+            foreach (var item in events)
                 Items.Add(item);
-            }
         }
 
         public class MyCommand : ICommand
@@ -59,7 +56,7 @@ namespace HMIN309_TP3.ViewModels
             {
                 Items.Clear();
 
-                var items = await Task.FromResult(DatabaseHelper.GetAllEventsByName(EventName));
+                var items = await Task.FromResult(DatabaseHelper.GetAllEventsByNameOrDate(EventName));
 
                 foreach (var item in items)
                 {

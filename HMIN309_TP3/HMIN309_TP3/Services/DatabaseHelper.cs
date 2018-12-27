@@ -36,11 +36,11 @@ namespace HMIN309_TP3
             return sqliteConnection.Table<Event>().ToArray();
         }
 
-        public static Event[] GetAllEventsByName(string eventName)
+        public static Event[] GetAllEventsByNameOrDate(string charSequence)
         {
             RemoveOldEvents();
 
-            return sqliteConnection.Table<Event>().Where(x => x.Name.ToLower().Contains(eventName.ToLower())).ToArray();
+            return sqliteConnection.Table<Event>().Where(x => x.Name.ToLower().Contains(charSequence.ToLower()) || x.DateText.ToLower().Contains(charSequence.ToLower())).ToArray();
         }
 
         private static void RemoveOldEvents()
