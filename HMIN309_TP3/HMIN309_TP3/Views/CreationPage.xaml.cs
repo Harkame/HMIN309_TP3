@@ -8,8 +8,6 @@ using HMIN309_TP3.Models;
 using HMIN309_TP3.Services;
 using Plugin.LocalNotifications;
 using Plugin.Media.Abstractions;
-using Plugin.Media;
-using HMIN309_TP3.ViewModels;
 
 namespace HMIN309_TP3.Views
 {

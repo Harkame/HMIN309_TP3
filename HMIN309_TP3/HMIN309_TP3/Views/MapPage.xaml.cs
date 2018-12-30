@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Geocoding;
+using Geocoding.Google;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.Xaml;
@@ -14,96 +13,36 @@ namespace HMIN309_TP3.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MapPage : ContentPage
 	{
-        Map map;
         public MapPage()
         {
-            map = new Map
-            {
+            InitializeComponent();
 
-                HeightRequest = 100,
-                WidthRequest = 960,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-
-
-            map.MoveToRegion(new MapSpan(new Position(0, 0), 360, 360));
-
-
-            var slider = new Slider(1, 18, 1);
-            slider.ValueChanged += (sender, e) => {
-                var zoomLevel = e.NewValue;
-                var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
-                Debug.WriteLine(zoomLevel + " -> " + latlongdegrees);
-                if (map.VisibleRegion != null)
-                    map.MoveToRegion(new MapSpan(map.VisibleRegion.Center, latlongdegrees, latlongdegrees));
-            };
-
-
-            var street = new Button { Text = "Street" };
-            var hybrid = new Button { Text = "Hybrid" };
-            var satellite = new Button { Text = "Satellite" };
-            street.Clicked += HandleClicked;
-            hybrid.Clicked += HandleClicked;
-            satellite.Clicked += HandleClicked;
-            var segments = new StackLayout
-            {
-                Spacing = 30,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Orientation = StackOrientation.Horizontal,
-                Children = { street, hybrid, satellite }
-            };
-
-
-            var stack = new StackLayout { Spacing = 0 };
-            stack.Children.Add(map);
-            stack.Children.Add(slider);
-            stack.Children.Add(segments);
-            Content = stack;
-
-
-            map.PropertyChanged += (sender, e) => {
-                Debug.WriteLine(e.PropertyName + " just changed!");
-                if (e.PropertyName == "VisibleRegion" && map.VisibleRegion != null)
-                    CalculateBoundingCoordinates(map.VisibleRegion);
-            };
-
-        }
-        void HandleClicked(object sender, EventArgs e)
-        {
-            var b = sender as Button;
-            switch (b.Text)
-            {
-                case "Street":
-                    map.MapType = MapType.Street;
-                    break;
-                case "Hybrid":
-                    map.MapType = MapType.Hybrid;
-                    break;
-                case "Satellite":
-                    map.MapType = MapType.Satellite;
-                    break;
-            }
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(35.71d, 139.81d), 12d);
         }
 
-
-        static void CalculateBoundingCoordinates(MapSpan region)
+        protected override async void OnAppearing()
         {
-            var center = region.Center;
-            var halfheightDegrees = region.LatitudeDegrees / 2;
-            var halfwidthDegrees = region.LongitudeDegrees / 2;
+            base.OnAppearing();
 
-            var left = center.Longitude - halfwidthDegrees;
-            var right = center.Longitude + halfwidthDegrees;
-            var top = center.Latitude + halfheightDegrees;
-            var bottom = center.Latitude - halfheightDegrees;
+            await Task.Delay(1000); // workaround for #30 [Android]Map.Pins.Add doesn't work when page OnAppearing
 
-            if (left < -180) left = 180 + (180 + left);
-            if (right > 180) right = (right - 180) - 180;
+            var pin = new Pin()
+            {
+                Type = PinType.Place,
+                Label = "Tokyo SKYTREE",
+                Address = "Sumida-ku, Tokyo, Japan",
+                Position = new Position(35.71d, 139.81d)
+            };
+            map.Pins.Add(pin);
 
-            Debug.WriteLine("Bounding box:");
-            Debug.WriteLine("                    " + top);
-            Debug.WriteLine("  " + left + "                " + right);
-            Debug.WriteLine("                    " + bottom);
+        }
+
+        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "AIzaSyDjd3wposlRaz0VoubNOIul-cI29qqR1hs" };
+            IEnumerable<Address> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+            Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennsylvania Ave SE, Washington, DC 20003, USA
+            Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8791981, -76.9818437
         }
     }
 }
