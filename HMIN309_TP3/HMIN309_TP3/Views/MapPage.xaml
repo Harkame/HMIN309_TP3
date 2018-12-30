@@ -9,7 +9,7 @@
             Orientation="Vertical">
             <SearchBar
                 x:Name="SearchBar"
-                Unfocused="SearchBar_OnTextChanged"/>
+                Unfocused="SearchBar_Unfocused"/>
             <googlemaps:Map x:Name="map"/>
         </StackLayout>
     </ContentPage.Content>

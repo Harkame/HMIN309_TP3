@@ -8,15 +8,17 @@ using HMIN309_TP3.ViewModels;
 using HMIN309_TP3.Services;
 using Plugin.Media.Abstractions;
 using System.IO;
+using System.Threading.Tasks;
+using Xamarin.Forms.GoogleMaps;
 
 namespace HMIN309_TP3.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemDetailPage : ContentPage
+    public partial class ItemDetailPage : ContentPage, InterfaceEventOwner
     {
         private ItemDetailViewModel viewModel;
 
-        private Event item;
+        public Event Event { get; set; }
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
@@ -24,45 +26,51 @@ namespace HMIN309_TP3.Views
 
             BindingContext = this.viewModel = viewModel;
 
-            item = viewModel.Item;
+            Event = viewModel.Item;
 
-            MediaFile photo = new MediaFile(item.FilePath, () =>
+            MediaFile photo = new MediaFile(Event.FilePath, () =>
             {
-                return File.OpenRead(item.FilePath);
+                return File.OpenRead(Event.FilePath);
             },
             null,
-            item.FilePath);
+            Event.FilePath);
 
             if (photo != null)
             {
                 PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
             }
-            
         }
 
         public ItemDetailPage()
         {
             InitializeComponent();
 
-            item = new Event
+            Event = new Event
             {
                 Name = "",
                 Description = ""
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new ItemDetailViewModel(Event);
             BindingContext = viewModel;
         }
 
         public async void DeleteEvent(object sender, EventArgs e)
         {
-            DatabaseHelper.deleteEvent(item);
+            DatabaseHelper.deleteEvent(Event);
 
-            File.Delete(item.FilePath);
+            File.Delete(Event.FilePath);
 
             DependencyService.Get<IMessage>().ShortAlert("Event delete");
 
             await Navigation.PopAsync();
+        }
+
+        private async void Click_Geolocation(object sender, EventArgs e)
+        {
+            MapPage mappage = new MapPage(this);
+
+            await Navigation.PushAsync(mappage);
         }
     }
 }

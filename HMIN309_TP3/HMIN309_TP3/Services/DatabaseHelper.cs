@@ -45,7 +45,7 @@ namespace HMIN309_TP3
 
         private static void RemoveOldEvents()
         {
-            sqliteConnection.Execute("DELETE FROM Events WHERE date < " + DateTime.Now.Ticks + "; ");
+            sqliteConnection.Execute("DELETE FROM Events WHERE event_date < " + DateTime.Now.Ticks + "; ");
         }
     }
 }

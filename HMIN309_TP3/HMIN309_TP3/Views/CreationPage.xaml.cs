@@ -12,7 +12,7 @@ using Plugin.Media.Abstractions;
 namespace HMIN309_TP3.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreationPage : ContentPage
+    public partial class CreationPage : ContentPage, InterfaceEventOwner
     {
         public Event Event { get; set; }
         public DateTime MinimumDate { get; set; }
@@ -29,7 +29,10 @@ namespace HMIN309_TP3.Views
                 Name = "",
                 Date = 0,
                 Type = "",
-                Description = ""
+                Description = "",
+                Address = "",
+                Latitude = 0.0,
+                Longitude = 0.0
             };
 
             MinimumDate = DateTime.Now;
@@ -67,7 +70,9 @@ namespace HMIN309_TP3.Views
 
         private async void Click_Geolocation(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MapPage());
+            MapPage mappage = new MapPage(this);
+
+            await Navigation.PushAsync(mappage);
         }
     }
 }

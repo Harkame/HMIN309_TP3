@@ -1,27 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:googlemaps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="HMIN309_TP3.Views.ItemDetailPage"
              Title="{Binding Title}">
     <ScrollView>
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Name" FontSize="Medium" />
-        <Label Text="{Binding Item.Name}" FontSize="Small"/>
-        <Label Text="Dat:" FontSize="Medium" />
-        <Label Text="{Binding Item.DateText}" FontSize="Small"/>
-        <Label Text="Type" FontSize="Medium" />
-        <Label Text="{Binding Item.Type}" FontSize="Small"/>
-        <Label Text="Description" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
-        <Image x:Name="PhotoImage" />
-        <Button
-                Text="Delete"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="Center"
-                Clicked="DeleteEvent"
-                BackgroundColor="Red"
-                TextColor="White"
-            />
-    </StackLayout>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Name" FontSize="Medium" />
+            <Label Text="{Binding Item.Name}" FontSize="Small"/>
+            <Label Text="Dat:" FontSize="Medium" />
+            <Label Text="{Binding Item.DateText}" FontSize="Small"/>
+            <Label Text="Type" FontSize="Medium" />
+            <Label Text="{Binding Item.Type}" FontSize="Small"/>
+            <Label Text="Description" FontSize="Medium" />
+            <Label Text="{Binding Item.Description}" FontSize="Small"/>
+            <Button Clicked="Click_Geolocation" Text="Geolocation"/>
+            <Image x:Name="PhotoImage" />
+
+            <Button
+                    Text="Delete"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="Center"
+                    Clicked="DeleteEvent"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                />
+        </StackLayout>
         </ScrollView>
 </ContentPage>
