@@ -40,6 +40,14 @@ Une flèche relie les méthodes lorsqu'elles s'appellent entre elles. (Dans le s
 
 Dans ce projet nous avons tester la modification de code avec Spoon.
 
+Dans cet exemple nous allons modifier une classe personne
+
++ Ajout d'un attribut "city"
+++ Ajout de lattribut dans la liste des attributs
+++ Ajout de l'attribut dans le constructeur
+++ Ajout de l'attribut dans la méthode toString
++ Ajout d'une méthode
+
 ``` java
 package fr.harkame.spoon.modification.model;
 
