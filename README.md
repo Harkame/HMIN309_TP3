@@ -10,45 +10,42 @@ Sous-eclipse (ou autre), ajouter TOUS les fichiers jar (lib/) au build path
 
 ## ASTParser
 
-Executer fr.harkame.hmin306tp4.astparser.main.ASTParserMain.java
+Executer fr.harkame.astparser.main.ASTParserMain.java
 
 ## Spoon
 
-Executer fr.harkame.hmin306tp4.spoon.modification.main.SpoonMain.java
+Executer fr.harkame.spoon.modification.main.SpoonMain.java
 
 ## Fonctionnement
 
-Pour ASTParser et Spoon, toutes les fonctionnalités suivantes ont étés developpées, l'utilisation est la même pour les 2 Mains.
-
 Par défault, l'analyse porte sur le projet lui même, pour analyser un projet il suffit de mettre le chemin du code source (src/) dans les mains au lieu de "./src"
 
-## Metriques
+## Metriques (ASTParser)
 
-Beaucoup plus complète pour ASTParser, on relève quelques métriques :
+On relève quelques métriques :
 + Nombre de classes
 + Nombre de méthodes
 + ... (Voir ASTParserMain)
 
-## Graphe d'appels
-
-Nous recommendons d'utiliser la version Spoon car celle d'AST pose problème pour les appels de méthode dans une même classe, nottament si l'appel n'utilise pas "this".
+## Graphe d'appels (ASTPArser)
 
 Affichage l'ensemble des classes internes an projet (en bleu), pour chaque classe on vois la liste des méthodes de cette dernière.
 Une flèche relie les méthodes lorsqu'elles s'appellent entre elles. (Dans le sens de la flèche, methode1 -> méthodeB).
 
-## Exemple avec Spoon
+## Exemple avec Spoon (Modification)
 
-Dans ce projet nous avons tester la modification de code avec Spoon.
+Dans ce projet nous avons tester la modification de code avec Spoon (Un code qui modifie du code).
 
-Dans cet exemple nous allons modifier une classe personne
+Dans cet exemple nous allons modifier une classe "Person"
 
 + Ajout d'un attribut "city"
-	+ Ajout de lattribut dans la liste des attributs
+	+ Ajout de l'attribut dans la liste des attributs
 	+ Ajout de l'attribut dans le constructeur
 	+ Ajout de l'attribut dans la méthode toString
 + Ajout d'une méthode
++ Enregistrement des modification dans une classe "Person" dans un package "modified"
 
-Enregistrement des modification dans une classe "Person" dans un package "modified"
+Avant modification
 
 ``` java
 package fr.harkame.spoon.modification.model;
@@ -116,6 +113,11 @@ public class Person {
 # Code (packages)
 
 + astparser : La partie avec ASTParser
+	+ astparser : La partie analyse avec ASTParser (récupération des données, etc)
+		+ example :
+			+ visitor : Nos Visiteurs pour analyser un projet
+		+ main : Le Main de la partie ASTParser
+		+ util : Des méthodes utiles pour certaine étapes de l'analyse
 	+ structure : Nos différentes structure pour afficher le graphe/calculer certaine métrique
 	+ graph : La partie affichage des graphes
 + spoon : La partie avec Spoon
