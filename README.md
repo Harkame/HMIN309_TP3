@@ -48,6 +48,8 @@ Dans cet exemple nous allons modifier une classe personne
 	+ Ajout de l'attribut dans la méthode toString
 + Ajout d'une méthode
 
+Enregistrement des modification dans une classe "Person" dans un package "modified"
+
 ``` java
 package fr.harkame.spoon.modification.model;
 
