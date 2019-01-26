@@ -117,7 +117,7 @@ public class Person {
 
 + astparser : La partie avec ASTParser
 	+ structure : Nos différentes structure pour afficher le graphe/calculer certaine métrique
-+ graph : La partie affichage des graphes
+	+ graph : La partie affichage des graphes
 + spoon : La partie avec Spoon
 
 # Librairie
