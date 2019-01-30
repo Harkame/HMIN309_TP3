@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:googlemaps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             x:Class="HMIN309_TP3.Views.CreationPage"
+             Title="Creation">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Name" FontSize="Medium" />
+                <Entry
+                    Text="{Binding Event.Name}"
+                    Placeholder="Example : Footing"
+                    FontSize="Small"
+                    />
+                <Label Text="Date" FontSize="Medium" />
+                <DatePicker
+                    MinimumDate="{Binding MinimumDate}"
+                    Date="{Binding Date}"
+                    MaximumDate="{Binding MaximumDate}" />
+                <TimePicker
+                    Time="{Binding NotificationTime}"
+                    HorizontalOptions="Center"
+                />
+                <Label Text="Type" FontSize="Medium" />
+                <Entry
+                    Text="{Binding Event.Type}"
+                    Placeholder="Example : Sport"
+                    FontSize="Small"
+                    Margin="0"
+                />
+                <Label
+                    Text="Description"
+                    FontSize="Medium"
+                />
+                    <Entry
+                    Text="{Binding Event.Description}"
+                    Placeholder="Example : 10KM"
+                    FontSize="Small"
+                    Margin="0"
+                />
+                <Button Clicked="Click_Geolocation" Text="Geolocation"/>
+                <Image x:Name="PhotoImage" />
+                <Button x:Name="CameraButton" Text="Take Photo"/>
+                </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
