@@ -78,6 +78,8 @@ namespace HMIN309_TP3.Views
 
             CrossLocalNotifications.Current.Show(Event.Name, Event.Description, 101, new DateTime(Event.Date));
 
+            PhotoImage.Source = null;
+
             DependencyService.Get<IMessage>().ShortAlert("Event created");
         }
 
