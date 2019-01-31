@@ -27,10 +27,7 @@ namespace HMIN309_TP3.Views
 
             InterfaceEventOwner = interfaceEventOwner;
             
-            if (InterfaceEventOwner.Event.Address.Equals(""))
-                map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(48.866667, 2.333333), 12d);
-            else
-                map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(InterfaceEventOwner.Event.Latitude, InterfaceEventOwner.Event.Longitude), 12d);
+            map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(InterfaceEventOwner.Event.Latitude, InterfaceEventOwner.Event.Longitude), 12d);
         }
 
         protected override async void OnAppearing()
@@ -42,7 +39,7 @@ namespace HMIN309_TP3.Views
             string showedAddress = "";
 
             if (InterfaceEventOwner.Event.Address.Equals(""))
-                showedAddress = "Paris";
+                showedAddress = "Current";
             else
                 showedAddress = InterfaceEventOwner.Event.Address;
 
@@ -57,10 +54,6 @@ namespace HMIN309_TP3.Views
 
         }
 
-        private void SearchBar_Unfocused(object sender, FocusEventArgs e)
-        {
-            ResolveAddress(SearchBar.Text);
-        }
 
         private async void ResolveAddress(string address)
         {
@@ -97,6 +90,18 @@ namespace HMIN309_TP3.Views
             map.Pins.Add(pin);
 
             await map.MoveCamera(CameraUpdateFactory.NewPositionZoom(new Position(InterfaceEventOwner.Event.Latitude, InterfaceEventOwner.Event.Longitude), 12d));
+        }
+
+        private async void Click_Geolocation(object sender, EventArgs e)
+        {
+            //ResolveAddress(SearchBar.Text);
+
+            await Navigation.PopAsync();
+        }
+
+        private void SearchBar_Unfocused(object sender, FocusEventArgs e)
+        {
+            ResolveAddress(SearchBar.Text);
         }
     }
 }

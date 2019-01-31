@@ -26,12 +26,15 @@
                     HorizontalOptions="Center"
                 />
                 <Label Text="Type" FontSize="Medium" />
-                <Entry
-                    Text="{Binding Event.Type}"
-                    Placeholder="Example : Sport"
-                    FontSize="Small"
-                    Margin="0"
-                />
+                <Picker x:Name="picker" Title="Select an type">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Rendez-vous</x:String>
+                            <x:String>Raid</x:String>
+                            <x:String>Sport</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
                 <Label
                     Text="Description"
                     FontSize="Medium"
@@ -43,9 +46,9 @@
                     Margin="0"
                 />
                 <Button Clicked="Click_Geolocation" Text="Geolocation"/>
-                <Image x:Name="PhotoImage" />
                 <Button x:Name="CameraButton" Text="Take Photo"/>
-                </StackLayout>
+                <Image x:Name="PhotoImage" />
+            </StackLayout>
             </ScrollView>
     </ContentPage.Content>
 </ContentPage>

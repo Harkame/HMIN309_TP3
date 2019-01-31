@@ -9,7 +9,9 @@
             Orientation="Vertical">
             <SearchBar
                 x:Name="SearchBar"
-                Unfocused="SearchBar_Unfocused"/>
+                Unfocused="SearchBar_Unfocused"
+            />
+            <Button Clicked="Click_Geolocation" Text="Validate"/>
             <googlemaps:Map x:Name="map"/>
         </StackLayout>
     </ContentPage.Content>

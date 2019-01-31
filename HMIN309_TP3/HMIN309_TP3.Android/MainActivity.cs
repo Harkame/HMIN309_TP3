@@ -28,7 +28,7 @@ namespace HMIN309_TP3.Droid
             LoadApplication(new App());
 
 
-            ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.Camera, Manifest.Permission.WriteExternalStorage, Manifest.Permission.ReadExternalStorage }, REQUEST_LOCATION);
+            ActivityCompat.RequestPermissions(this, new String[] { Manifest.Permission.Camera, Manifest.Permission.WriteExternalStorage, Manifest.Permission.ReadExternalStorage, Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation, Manifest.Permission.AccessLocationExtraCommands}, REQUEST_LOCATION);
         }
 
     }
